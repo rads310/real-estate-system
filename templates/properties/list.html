@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Properties List</h2>
+<a href="{{ url_for('properties.add_property') }}" class="btn btn-primary mb-3">Add Property</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Address</th>
+            <th>Area</th>
+            <th>Price</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for property in properties %}
+        <tr>
+            <td>{{ property.id }}</td>
+            <td>{{ property.address }}</td>
+            <td>{{ property.area }}</td>
+            <td>{{ property.price }}</td>
+            <td>{{ property.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
