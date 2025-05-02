@@ -1,3 +1,8 @@
+"""
+Основной модуль приложения Real Estate System.
+Инициализирует Flask-приложение, настройки базы данных и маршруты.
+"""
+
 from flask import Flask, redirect, url_for
 from models import db
 from routes.properties import properties_bp
@@ -8,6 +13,13 @@ import os
 from pathlib import Path
 
 def create_app():
+
+    """
+    Фабрика для создания Flask-приложения.
+    Возвращает:
+        Flask: настроенное Flask-приложение
+    """
+
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
     
@@ -25,6 +37,9 @@ def create_app():
     
     @app.route('/')
     def home():
+        
+        """Перенаправление на страницу объектов недвижимости"""
+
         return redirect(url_for('properties.list_properties'))
     
     return app

@@ -1,8 +1,25 @@
+"""
+Модуль моделей базы данных SQLAlchemy.
+Содержит определения всех таблиц и их отношений.
+"""
+
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 class Property(db.Model):
+
+    """
+    Модель объекта недвижимости.
+    
+    Атрибуты:
+        id (int): Первичный ключ
+        address (str): Полный адрес (не может быть пустым)
+        area (float): Площадь в кв.м (не может быть пустым)
+        price (float): Цена объекта (не может быть пустым)
+        status (str): Статус объекта (default: 'available')
+    """
+
     id = db.Column(db.Integer, primary_key=True)
     address = db.Column(db.String(200), nullable=False)
     area = db.Column(db.Float, nullable=False)
