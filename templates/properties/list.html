@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Properties List</h2>
-<a href="{{ url_for('properties.add_property') }}" class="btn btn-primary mb-3">Add Property</a>
-<table class="table">
-    <thead>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Properties List</h2>
+    <a href="{{ url_for('properties.add_property') }}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Add Property
+    </a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Address</th>
             <th>Area</th>
             <th>Price</th>
             <th>Status</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -18,9 +24,24 @@
         <tr>
             <td>{{ property.id }}</td>
             <td>{{ property.address }}</td>
-            <td>{{ property.area }}</td>
-            <td>{{ property.price }}</td>
-            <td>{{ property.status }}</td>
+            <td>{{ property.area }} sq.m</td>
+            <td>${{ "{:,.2f}".format(property.price) }}</td>
+            <td>
+                <span class="badge 
+                    {% if property.status == 'available' %}badge-success
+                    {% elif property.status == 'sold' %}badge-danger
+                    {% else %}badge-warning{% endif %}">
+                    {{ property.status|title }}
+                </span>
+            </td>
+            <td>
+                <a href="#" class="btn btn-sm btn-primary">Edit</a>
+                <a href="#" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" class="text-center">No properties found</td>
         </tr>
         {% endfor %}
     </tbody>
