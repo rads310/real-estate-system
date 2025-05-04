@@ -1,0 +1,37 @@
+[project]
+name = "real-estate-system"
+version = "1.0.0"
+description = "Система управления недвижимостью"
+authors = [{name = "Руслан", email = "ruslanvaliullin98@gmail.com"}]
+requires-python = ">=3.9"
+dependencies = [
+    "Flask==3.0.2",
+    "Flask-SQLAlchemy==3.1.1",
+    "Flask-WTF==1.2.0",
+    "python-dotenv==1.0.0"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest==8.0.0",
+    "pytest-cov==4.1.0",
+    "factory-boy==3.3.0"
+]
+dev = [
+    "flake8==6.1.0",
+    "black==23.12.0"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=app --cov-report=term-missing"
+python_files = "test_*.py"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.coverage.run]
+source = ["app"]
+omit = ["app/__init__.py"]
+
+[build-system]
+requires = ["setuptools>=64.0.0"]
+build-backend = "setuptools.build_meta"
